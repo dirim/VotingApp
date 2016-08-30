@@ -1,0 +1,104 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="layout">
+<th:block layout:fragment="content">
+    <div class="row">
+        <h1>Create a question</h1>
+        <div class="ui container">
+            <form class="ui question form" method="post" th:action="@{/questions}" th:object="${question}">
+
+                <div th:text="${user.name}"></div>
+
+                <div class="field">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Question Name" th:field="*{name}" />
+                </div>
+
+                <div class="field">
+                    <label for="description">Description</label>
+                    <textarea id="description" placeholder="Question" th:field="*{description}" ></textarea>
+                </div>
+
+                <div class="field">
+                    <label>Choices</label>
+                    <div class="field">
+                        <div class="fields">
+                            <div class="fourteen wide field" >
+                                <input type="text" th:name="${'choices[0].text'}" placeholder="choice 1" />
+                            </div>
+                            <div class="two wide field">
+                                <button class="ui icon button" type="button">
+                                    <i class="trash icon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="fourteen wide field">
+                                <input type="text" th:name="${'choices[1].text'}" placeholder="choice 2" />
+                            </div>
+                            <div class="two wide field">
+                                <button class="ui icon button" type="button">
+                                    <i class="trash icon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="fourteen wide field">
+                                <input type="text" th:name="${'choices[2].text'}" placeholder="choice 3" />
+                            </div>
+                            <div class="two wide field">
+                                <button class="ui icon button" type="button">
+                                    <i class="trash icon"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fields">
+                    <div class="two wide field">
+                        <i class="add square icon"></i>
+                    </div>
+                    <div class="fourteen wide field">
+                        <label>Add new question</label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Question answerable for</label>
+
+                    <div class="fields">
+                        <div class="four wide field">
+                            <button class="ui ten minutes button" type="button">
+                                10 minutes
+                            </button>
+                        </div>
+                        <div class="four wide field">
+                            <button class="ui thirty minutes button" type="button">
+                                30 minutes
+                            </button>
+                        </div>
+                        <div class="four wide field">
+                            <button class="ui noon button" type="button">
+                                Until noon
+                            </button>
+                        </div>
+                        <div class="four wide field">
+                            <button class="ui today button" type="button">
+                                Until the end of today
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class= "field">
+                        <label>Minutes</label>
+                        <input type="number" id="timeoutCalculation"  placeholder="Timeout" th:field="*{timeout}" th:value="5"/>
+                    </div>
+                </div>
+
+                <button class="ui button" type="submit">Create</button>
+            </form>
+        </div>
+    </div>
+</th:block>
+</html>

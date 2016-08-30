@@ -1,0 +1,51 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="layout">
+<th:block layout:fragment="content">
+
+    <div class="row">
+        <div class="ui grid">
+            <div class="six wide column">
+                <h1>Questions</h1>
+            </div>
+            <div class="six wide column">
+                <a th:href="@{/questions/new}">
+                    <button class="ui right floated button">Add Question</button>
+                </a>
+            </div>
+        </div>
+
+        <div class="ui grid">
+            <div class="six wide column">
+                <div class="ui checkbox">
+                    <input type="checkbox" name="myQuestions"/>
+                    <label>Only my questions</label>
+                </div>
+            </div>
+            <div class="six wide column">
+                <button class="ui right floated button">Filter</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <table class="ui celled table">
+                <thead>
+                <tr>
+                    <th>Question Name</th>
+                    <th>Status</th>
+                    <th>Owner</th>
+                    <th>Votes</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="question :${questions}">
+                    <td><a th:href="@{'/questions/' + ${question.id}}" th:text="${question.description}"/></td>
+                    <td><a th:href="@{'/questions/' + ${question.id}}" th:text="${question.timeout}"/></td>
+                    <td><a th:href="@{'/questions/' + ${question.id}}" th:text="*{question.owner.name}" /></td>
+                    <!--<td th:text="*{question.choices.voteCount}"></td>-->
+                </tr>
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    </div>
+</th:block>
+</html>

@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="layout">
+<th:block layout:fragment="content">
+
+    <div class="row">
+        <h1>Answering a question</h1>
+        <div class="ui container">
+            <form class="ui answer form" th:object="${question}">
+                <div class="grouped fields">
+
+                    <label>Desc</label>
+                    <div class="description">
+                        <span th:text="*{description}"></span>
+                    </div>
+
+                    <div class="field">
+                        <div class="ui list">
+                            <div class="item" th:each="choice, iterStat : *{choices}">
+                                <input type="radio" name="choices"
+                                       th:value="${choice.text}" th:text="${choice.text}" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <button class="ui vote button" type="submit">Vote</button>
+            </form>
+        </div>
+    </div>
+</th:block>
+</html>

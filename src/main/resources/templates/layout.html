@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/semantic.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/semantic-overrides.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/icon.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+    <script th:src="@{/js/semantic.min.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+</head>
+
+<body data-page="dashboard">
+
+<div class="ui grid container">
+    <div class="four wide column">
+        <div class="ui left fixed vertical inverted menu">
+            <a class="item" href="./login.html">
+                <h4 class="ui grey header">John Doe</h4>
+                <p>Sign Out</p>
+            </a>
+            <a class="active gray item" th:href="@{/questions/new}">
+                Question Form
+            </a>
+            <a class="item" th:href="@{/questions}">
+                Question List
+            </a>
+
+            <!--<a class="item" href="./products.html">-->
+            <!--Products-->
+            <!--<div class="ui label"></div>-->
+            <!--</a>-->
+            <!--<a class="item" href="./customers.html">-->
+            <!--Customers-->
+            <!--</a>-->
+            <!--<a class="item" href="./employees.html">-->
+            <!--Employees-->
+            <!--</a>-->
+        </div>
+    </div>
+
+                <div class="twelve wide column">
+                <th:block layout:fragment="content"/>
+                    </div>
+            </div>
+
+</body>
+</html>
