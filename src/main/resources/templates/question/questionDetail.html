@@ -4,7 +4,7 @@
     <div class="row">
         <h1>Answering a question</h1>
         <div class="ui container">
-            <form class="ui answer form" th:object="${question}">
+            <form class="ui answer form" method="post" th:action="@{/answers}" th:object="${question}">
                 <div class="grouped fields">
 
                     <label>Desc</label>
@@ -13,9 +13,10 @@
                     </div>
 
                     <div class="field">
+                        <input type="hidden" name="id" th:value="*{id}" />
                         <div class="ui list">
-                            <div class="item" th:each="choice, iterStat : *{choices}">
-                                <input type="radio" name="choices"
+                            <div class="item" th:each="choice: *{choices}">
+                                <input type="radio" name="choice"
                                        th:value="${choice.text}" th:text="${choice.text}" />
                             </div>
                         </div>
