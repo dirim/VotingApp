@@ -1,14 +1,17 @@
 package com.kodgemisi.votingApp.controller;
 
-import com.kodgemisi.votingApp.domain.*;
+import com.kodgemisi.votingApp.domain.Answer;
+import com.kodgemisi.votingApp.domain.Choice;
+import com.kodgemisi.votingApp.domain.QuestionDto;
+import com.kodgemisi.votingApp.domain.User;
 import com.kodgemisi.votingApp.repository.ChoiceRepository;
-import com.kodgemisi.votingApp.repository.QuestionRepository;
 import com.kodgemisi.votingApp.repository.UserRepository;
+import com.kodgemisi.votingApp.service.AnswerService;
+import com.kodgemisi.votingApp.service.ChoiceService;
+import com.kodgemisi.votingApp.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Id;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,39 +27,30 @@ import javax.validation.Valid;
 @RequestMapping("/answers")
 public class AnswerController {
 
-	@Autowired
-	private ChoiceRepository choiceRepository;
+	@Autowired private ChoiceService choiceService;
 
-	@Autowired
-	private QuestionRepository questionRepository;
+	@Autowired private QuestionService questionService;
 
-	@Autowired
-	private UserRepository userRepository;
+	@Autowired private UserRepository userRepository;
+
+	@Autowired private AnswerService answerService;
+
+	@Autowired private ChoiceRepository choiceRepository;
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String answeringQuestion(@ModelAttribute @Valid QuestionDto questionDto, BindingResult bindingResult,
-									@AuthenticationPrincipal User user){
+									@AuthenticationPrincipal User user) {
 
-		if(bindingResult.hasErrors()){
+		if (bindingResult.hasErrors()) {
 			return "redirect:/questions";
 		}
 
-		Answer answer =  new Answer();
-		answer.setOwner(user);
+		this.answerService.createAnswer(user, questionDto);
 
-		Choice choice = new Choice();
-		choice.setText(questionDto.getChoice());
-		answer.setChoice(choice);
-
-		user.getAnswers().add(answer);
-
-
-		choice.setVoteCount(choice.getVoteCount() + 1);
-		choice.getAnswers().add(answer);
-
+		//user.getAnswers().add(answer);
+		this.userRepository.save(user);
 
 		return "redirect:/questions/{id}";
 	}
-
 
 }

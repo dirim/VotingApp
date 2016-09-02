@@ -6,11 +6,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by ozge on 17.08.2016.
@@ -28,7 +26,7 @@ public class User extends BaseEntity implements UserDetails {
 	private Set<Question> questions;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	private Set<Answer> answers;
+	private Set<Answer> answers = new HashSet<>();
 
 	public User() {
 	}

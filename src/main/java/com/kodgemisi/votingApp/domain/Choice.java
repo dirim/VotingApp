@@ -1,6 +1,7 @@
 package com.kodgemisi.votingApp.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -11,13 +12,13 @@ public class Choice extends BaseEntity {
 
 	private String text;
 
-	private Long voteCount;
+	private Long voteCount = 0L;
 
 	@ManyToOne
 	private Question question;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "choice")
-	private Set<Answer> answers;
+	private Set<Answer> answers = new HashSet<>();
 
 	public Choice() {
 	}

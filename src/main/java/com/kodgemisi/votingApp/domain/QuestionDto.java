@@ -7,7 +7,7 @@ public class QuestionDto {
 
 	private Long id;
 
-	private String choice;
+	private Long choiceId;
 
 	public QuestionDto() {
 	}
@@ -20,11 +20,11 @@ public class QuestionDto {
 		this.id = id;
 	}
 
-	public String getChoice() {
-		return choice;
+	public Long getChoiceId() {
+		return choiceId;
 	}
 
-	public void setChoice(String choice) {
-		this.choice = choice;
+	public void setChoiceId(Long choiceId) {
+		this.choiceId = choiceId;
 	}
 }

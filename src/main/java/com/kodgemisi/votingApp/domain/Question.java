@@ -20,7 +20,7 @@ public class Question extends BaseEntity {
 
 	private int timeout;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId")
 	private User owner;
 

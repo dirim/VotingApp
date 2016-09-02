@@ -10,5 +10,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ChoiceRepository extends CrudRepository<Choice, Long> {
-	Choice getChoiceById(@Param("choiceId") Long id);
+
+	Choice findById(@Param("choiceId") Long id);
+
 }

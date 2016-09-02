@@ -2,6 +2,7 @@ package com.kodgemisi.votingApp.controller;
 
 import com.kodgemisi.votingApp.domain.User;
 import com.kodgemisi.votingApp.repository.UserRepository;
+import com.kodgemisi.votingApp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
