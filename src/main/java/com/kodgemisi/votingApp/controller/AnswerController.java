@@ -47,10 +47,8 @@ public class AnswerController {
 
 		this.answerService.createAnswer(user, questionDto);
 
-		//user.getAnswers().add(answer);
-		this.userRepository.save(user);
+		return "redirect:/questions/" + questionDto.getId();
 
-		return "redirect:/questions/{id}";
 	}
 
 }
