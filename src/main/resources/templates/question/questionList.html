@@ -13,16 +13,18 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="six wide column">
-                <div class="ui checkbox">
-                    <input type="checkbox" name="myQuestions"/>
-                    <label>Only my questions</label>
+        <div class="ui container">
+            <form class="ui only my questions form" method="get">
+                <div class="two fields">
+                    <div class="field">
+                        <div class="ui checkbox">
+                            <input type="checkbox" name="mine"/>
+                            <label>Only my questions</label>
+                        </div>
+                    </div>
+                    <button class="ui button" type="submit">Filter</button>
                 </div>
-            </div>
-            <div class="six wide column">
-                <button class="ui right floated button">Filter</button>
-            </div>
+            </form>
         </div>
 
         <div class="row">

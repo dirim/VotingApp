@@ -17,17 +17,6 @@ public class ChoiceService {
 
 	@Autowired private ChoiceRepository choiceRepository;
 
-//	public Choice updateChoice(QuestionDto questionDto) {
-//
-//		//Choice choice = getChoiceById(id);
-//
-//		Choice choice = choiceRepository.findById(questionDto.getChoiceId());
-//		choice.setText(questionDto.getChoice());
-//		choice.setVoteCount(choice.getVoteCount() + 1);
-//
-//		return choiceRepository.save(choice);
-//	}
-
 	public Choice getChoiceById(Long id){
 		return choiceRepository.findById(id);
 	}

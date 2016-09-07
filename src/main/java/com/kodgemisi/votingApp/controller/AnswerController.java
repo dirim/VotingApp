@@ -1,7 +1,5 @@
 package com.kodgemisi.votingApp.controller;
 
-import com.kodgemisi.votingApp.domain.Answer;
-import com.kodgemisi.votingApp.domain.Choice;
 import com.kodgemisi.votingApp.domain.QuestionDto;
 import com.kodgemisi.votingApp.domain.User;
 import com.kodgemisi.votingApp.repository.ChoiceRepository;
@@ -27,15 +25,8 @@ import javax.validation.Valid;
 @RequestMapping("/answers")
 public class AnswerController {
 
-	@Autowired private ChoiceService choiceService;
-
-	@Autowired private QuestionService questionService;
-
-	@Autowired private UserRepository userRepository;
-
-	@Autowired private AnswerService answerService;
-
-	@Autowired private ChoiceRepository choiceRepository;
+	@Autowired
+	private AnswerService answerService;
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String answeringQuestion(@ModelAttribute @Valid QuestionDto questionDto, BindingResult bindingResult,

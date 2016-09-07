@@ -4,15 +4,13 @@ import com.kodgemisi.votingApp.domain.Choice;
 import com.kodgemisi.votingApp.domain.Question;
 import com.kodgemisi.votingApp.domain.User;
 import com.kodgemisi.votingApp.repository.QuestionRepository;
+import com.kodgemisi.votingApp.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -56,9 +54,16 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String listQuestions(Model model){
+	public String listQuestions(Model model, @RequestParam(value = "mine", required = false) boolean mine,
+								@AuthenticationPrincipal User user){
 
-		model.addAttribute("questions", this.questionRepository.findAll());
+		if(mine){
+			model.addAttribute("questions", this.questionRepository.findByOwner(user));
+		}
+		else{
+			model.addAttribute("questions", this.questionRepository.findAll());
+		}
+
 		return "question/questionList";
 	}
 
