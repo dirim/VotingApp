@@ -1,6 +1,40 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="layout">
 <th:block layout:fragment="content">
 
+<script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+
+    var timeout = [[${question.timeout}]];
+    console.log("zaa")
+    console.log(timeout);
+
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.text(minutes + ":" + seconds);
+
+            if (--timer < 0) {
+                clearInterval(timer);
+                display.text("sure doldu")
+            }
+        }, 1000);
+    }
+
+    jQuery(function ($) {
+        var minutes = timeout * 1,
+                display = $('#timer');
+        startTimer(minutes, display);
+    });
+
+    /*]]>*/
+</script>
+
     <div class="row">
         <h1>Answering a question</h1>
         <div class="ui container">
@@ -29,7 +63,7 @@
 
                 </div>
                 <div class="field">
-                   <div id="clockdiv"></div>
+                   <div id="timer"></div>
                 </div>
                 <button class="ui right floated vote button" type="submit">Vote</button>
             </form>

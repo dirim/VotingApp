@@ -10,7 +10,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
     <script th:src="@{/js/semantic.min.js}"></script>
-    <script th:src="@{/js/main.js}"></script>
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
 </head>
@@ -44,10 +44,10 @@
         </div>
     </div>
 
-                <div class="twelve wide column">
-                <th:block layout:fragment="content"/>
-                    </div>
-            </div>
+    <div class="twelve wide column">
+        <th:block layout:fragment="content"/>
+    </div>
+</div>
 
 </body>
 </html>
