@@ -6,8 +6,9 @@ $(document).ready(function () {
     
     $('.ui.ten.minutes.button').on("click", function () {
 
-         // var d = new Date("00:10:00");
-         // $('#timeoutCalculation').val(d);
+        //  var d = new Date();
+        // d.setHours(00, 10, 00);
+        //  $('#timeoutCalculation').val(d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds());
 
          $('#timeoutCalculation').val(10);
 
