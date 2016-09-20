@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created by ozge on 01.09.2016.
  */
@@ -48,4 +51,19 @@ public class AnswerService {
 
 		return answer;
 	}
+
+	public boolean timeCalculation(QuestionDto questionDto){
+
+		Calendar now = Calendar.getInstance();
+
+		Calendar creationDate = questionDto.getCreationDate();
+		creationDate.add(Calendar.MINUTE, questionDto.getTimeout());
+
+		if( now.getTime().compareTo(creationDate.getTime()) > 0){
+			return true;
+		}
+		return true;
+	}
+
+
 }

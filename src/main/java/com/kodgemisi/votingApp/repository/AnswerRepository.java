@@ -1,7 +1,9 @@
 package com.kodgemisi.votingApp.repository;
 
 import com.kodgemisi.votingApp.domain.Answer;
+import com.kodgemisi.votingApp.domain.User;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,4 +12,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AnswerRepository extends CrudRepository<Answer, Long> {
 
+	Answer findByOwner(@Param("owner") User owner);
 }

@@ -5,7 +5,13 @@
     /*<![CDATA[*/
 
     var timeout = [[${question.timeout}]];
-    console.log(timeout);
+    var questionAnswered = [[${answered}]];
+
+    if (questionAnswered) {
+        jQuery(function ($) {
+            $("#vote").prop("disabled", true);
+        });
+    }
 
     function startTimer(duration, display) {
         var timer = duration;
@@ -23,7 +29,7 @@
 
             if (--timer < 0) {
                 clearInterval(timer);
-                display.text("sure doldu")
+                display.text("sure doldu");
             }
         }, 1000);
     }
@@ -63,11 +69,17 @@
                         </div>
                     </div>
 
+                    <div class="field">
+                        <input type="hidden" name="creationDate" th:value="${#dates.format(question.creationDate, 'dd/MM/YYYY')}" />
+
+                        <input type="hidden" name="timeout" th:value="*{timeout}" />
+                    </div>
                 </div>
                 <div class="field">
                    <div id="timer"></div>
                 </div>
-                <button class="ui right floated vote button" type="submit">Vote</button>
+                <p th:text="${answered}"></p>
+                <button class="ui right floated vote button" id="vote" type="submit">Vote</button>
             </form>
         </div>
     </div>

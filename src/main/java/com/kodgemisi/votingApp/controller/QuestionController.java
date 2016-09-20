@@ -1,8 +1,10 @@
 package com.kodgemisi.votingApp.controller;
 
+import com.kodgemisi.votingApp.domain.Answer;
 import com.kodgemisi.votingApp.domain.Choice;
 import com.kodgemisi.votingApp.domain.Question;
 import com.kodgemisi.votingApp.domain.User;
+import com.kodgemisi.votingApp.repository.AnswerRepository;
 import com.kodgemisi.votingApp.repository.QuestionRepository;
 import com.kodgemisi.votingApp.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/questions")
 public class QuestionController {
+
+	@Autowired
+	private AnswerRepository answerRepository;
 
 	@Autowired
 	private QuestionRepository questionRepository;
@@ -68,9 +73,17 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public String showQuestion(Model model, @PathVariable("id") Long id){
+	public String showQuestion(Model model, @PathVariable("id") Long id,
+							   @AuthenticationPrincipal User user){
+
+		Answer ans = this.answerRepository.findByOwner(user);
+
+		if (ans != null) {
+			model.addAttribute("answered", true);
+		}
 
 		model.addAttribute("question", this.questionRepository.findOne(id));
+
 		return "question/questionDetail";
 	}
 
