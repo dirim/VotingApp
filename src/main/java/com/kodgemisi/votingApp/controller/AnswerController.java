@@ -5,6 +5,7 @@ import com.kodgemisi.votingApp.domain.QuestionDto;
 import com.kodgemisi.votingApp.domain.User;
 import com.kodgemisi.votingApp.repository.AnswerRepository;
 import com.kodgemisi.votingApp.repository.ChoiceRepository;
+import com.kodgemisi.votingApp.repository.QuestionRepository;
 import com.kodgemisi.votingApp.repository.UserRepository;
 import com.kodgemisi.votingApp.service.AnswerService;
 import com.kodgemisi.votingApp.service.ChoiceService;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created by ozge on 24.08.2016.
@@ -36,6 +38,9 @@ public class AnswerController {
 	@Autowired
 	private AnswerRepository answerRepository;
 
+	@Autowired
+	private QuestionRepository questionRepository;
+
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String answeringQuestion(@ModelAttribute @Valid QuestionDto questionDto, BindingResult bindingResult,
 									@AuthenticationPrincipal User user) {
@@ -44,9 +49,9 @@ public class AnswerController {
 			return "redirect:/questions";
 		}
 
-		Answer ans = this.answerRepository.findByOwner(user);
+		Answer answer = this.answerRepository.findByOwnerAndChoiceQuestion(user, this.questionRepository.findById(questionDto.getId()));
 
-		if(this.answerService.timeCalculation(questionDto) &&  (ans == null)){
+		if(this.answerService.timeCalculation(questionDto) &&  ( answer == null )){
 			this.answerService.createAnswer(user, questionDto);
 		}
 

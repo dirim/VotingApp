@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,10 +77,10 @@ public class QuestionController {
 	public String showQuestion(Model model, @PathVariable("id") Long id,
 							   @AuthenticationPrincipal User user){
 
-		Answer ans = this.answerRepository.findByOwner(user);
+		Answer answer = this.answerRepository.findByOwnerAndChoiceQuestion(user, this.questionRepository.findById(id));
 
-		if (ans != null) {
-			model.addAttribute("answered", true);
+		if (answer != null) {
+			model.addAttribute("answered", "Your vote is saved");
 		}
 
 		model.addAttribute("question", this.questionRepository.findOne(id));
