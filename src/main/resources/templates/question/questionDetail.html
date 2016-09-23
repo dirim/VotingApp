@@ -10,7 +10,9 @@
     if (questionAnswered) {
         jQuery(function ($) {
             $("#vote").prop("disabled", true);
+
             $('input[name="choiceId"]').attr('disabled', 'disabled');
+
         });
     }
 
@@ -64,8 +66,8 @@
                         <input type="hidden" name="id" th:value="*{id}" />
                         <div class="ui list">
                             <div class="item" th:each="choice: *{choices}">
-                                <input type="radio" id="choiceRadio" name="choiceId"
-                                       th:value="${choice.id}" th:text="${choice.text}" />
+                                <input type="radio" name="choiceId"
+                                       th:value="${choice.id}" th:text="${choice.text}" th:checked="(${choice.id} == ${selectedChoice})" />
                             </div>
                         </div>
                     </div>
@@ -80,7 +82,7 @@
                    <div id="timer"></div>
                 </div>
                 <p th:text="${answered}"></p>
-                <button class="ui right floated vote button" id="vote" type="submit">Vote</button>
+                <button class="ui right floated vote button" id="vote" th:data-content="You have voted before" type="submit">Vote</button>
             </form>
         </div>
     </div>

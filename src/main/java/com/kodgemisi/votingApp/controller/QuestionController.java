@@ -81,6 +81,7 @@ public class QuestionController {
 
 		if (answer != null) {
 			model.addAttribute("answered", "Your vote is saved");
+			model.addAttribute("selectedChoice", answer.getChoice().getId());
 		}
 
 		model.addAttribute("question", this.questionRepository.findOne(id));

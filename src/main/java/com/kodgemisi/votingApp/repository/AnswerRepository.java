@@ -17,7 +17,5 @@ public interface AnswerRepository extends CrudRepository<Answer, Long> {
 
 	Answer findByOwner(@Param("owner") User owner);
 
-	//List<Answer> findByChoiceQuestion(Question question);
-
 	Answer findByOwnerAndChoiceQuestion(User user, Question question);
 }
