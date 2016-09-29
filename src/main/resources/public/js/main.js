@@ -25,9 +25,14 @@ $(document).ready(function () {
 
     });
 
-    $('.ui.icon.button').on("click", function () {
-       $(".fourteen.wide.field").remove();
-
+    $('.remove-choice').on("click", function () {
+        var index = $(this).data("index");
+        $('#choicesForm .fields[data-index="' + index + '"] ').remove();
+       
+        if($("#choicesForm .fields").length == 2) {
+            $('.remove-choice').off("click");
+        }
+        
     });
 
     

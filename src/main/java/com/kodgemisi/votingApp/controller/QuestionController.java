@@ -33,6 +33,9 @@ public class QuestionController {
 	@Autowired
 	private QuestionRepository questionRepository;
 
+	@Autowired
+	private QuestionService questionService;
+
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public String newQuestion(Model model, @AuthenticationPrincipal User user){
 
@@ -67,7 +70,9 @@ public class QuestionController {
 			model.addAttribute("questions", this.questionRepository.findByOwner(user));
 		}
 		else{
-			model.addAttribute("questions", this.questionRepository.findAll());
+			Iterable<Question> questions = this.questionRepository.findAll();
+			Iterable<Question> calculatedQuestions = this.questionService.calculateVotes(questions);
+			model.addAttribute("questions", calculatedQuestions);
 		}
 
 		return "question/questionList";

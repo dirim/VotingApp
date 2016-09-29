@@ -24,6 +24,9 @@ public class Question extends BaseEntity {
 	@JoinColumn(name = "userId")
 	private User owner;
 
+	@Transient
+	private long voteCount;
+
 	public Question() {
 	}
 
@@ -33,6 +36,14 @@ public class Question extends BaseEntity {
 		this.timeout = timeout;
 		this.owner = owner;
 		this.choices = choices;
+	}
+
+	public long getVoteCount() {
+		return voteCount;
+	}
+
+	public void setVoteCount(long voteCount) {
+		this.voteCount = voteCount;
 	}
 
 	public String getDescription() {

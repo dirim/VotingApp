@@ -42,7 +42,7 @@
                     <td><a th:href="@{'/questions/' + ${question.id}}" th:text="${question.description}"/></td>
                     <td><a th:href="@{'/questions/' + ${question.id}}" th:text="${question.timeout}"/></td>
                     <td><a th:href="@{'/questions/' + ${question.id}}" th:text="*{question.owner.name}" /></td>
-                    <!--<td th:text="*{question.choices.voteCount}"></td>-->
+                    <td><a th:href="@{'/questions/' + ${question.id}}" th:text="${question.voteCount}" /></td>
                 </tr>
                 </tbody>
                 <tfoot></tfoot>
