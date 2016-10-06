@@ -40,7 +40,7 @@
                 <tbody>
                 <tr th:each="question :${questions}">
                     <td><a th:href="@{'/questions/' + ${question.id}}" th:text="${question.description}"/></td>
-                    <td><a th:href="@{'/questions/' + ${question.id}}" th:text="${question.timeout}"/></td>
+                    <td><div><a th:href="@{'/questions/' + ${question.id}}">Closes in <span th:text="${question.timeout}"></span></a></div></td>
                     <td><a th:href="@{'/questions/' + ${question.id}}" th:text="*{question.owner.name}" /></td>
                     <td><a th:href="@{'/questions/' + ${question.id}}" th:text="${question.voteCount}" /></td>
                 </tr>

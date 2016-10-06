@@ -8,6 +8,8 @@ import com.kodgemisi.votingApp.repository.AnswerRepository;
 import com.kodgemisi.votingApp.repository.QuestionRepository;
 import com.kodgemisi.votingApp.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -93,5 +95,13 @@ public class QuestionController {
 
 		return "question/questionDetail";
 	}
+
+//	@RequestMapping(value = "/{id}/chart", method = RequestMethod.GET)
+//	@ResponseBody
+//	ResponseEntity<String> showQuestionResult(@PathVariable("id")Long id){
+//
+//
+//		return new ResponseEntity(HttpStatus.OK);
+//	}
 
 }

@@ -19,7 +19,7 @@
 
                 <div class="field" id="choicesForm">
                     <label>Choices</label>
-                    <div class="field">
+                    <div class="field" id="choices">
                         <div class="fields" data-index="0">
                             <div class="fourteen wide field" >
                                 <input type="text" th:name="${'choices[0].text'}" placeholder="choice 1" />
@@ -30,37 +30,12 @@
                                 </button>
                             </div>
                         </div>
-
-                        <div class="fields" data-index="1">
-                            <div class="fourteen wide field">
-                                <input type="text" th:name="${'choices[1].text'}" placeholder="choice 2" />
-                            </div>
-                            <div class="two wide field">
-                                <button class="ui remove-choice icon button" data-index="1" type="button">
-                                    <i class="trash icon"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="fields" data-index="2">
-                            <div class="fourteen wide field">
-                                <input type="text" th:name="${'choices[2].text'}" placeholder="choice 3" />
-                            </div>
-                            <div class="two wide field">
-                                <button class="ui remove-choice icon button" data-index="2" type="button">
-                                    <i class="trash icon"></i>
-                                </button>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
-                <div class="fields">
-                    <div class="two wide field">
-                        <i class="add square icon"></i>
-                    </div>
-                    <div class="fourteen wide field">
-                        <label>Add new question</label>
+                <div class="field">
+                    <div class="ui add-choice button">
+                        <i class="add square icon"></i> Add new choice
                     </div>
                 </div>
 
