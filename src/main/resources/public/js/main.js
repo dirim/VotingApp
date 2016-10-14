@@ -6,7 +6,10 @@ $(document).ready(function () {
     
     $('.ui.ten.minutes.button').on("click", function () {
 
-         $('#timeoutCalculation').val(10);
+        $('#timeoutCalculation').val(10);
+
+        // var d = new Date("00:10:00");
+        // $('#timeoutCalculation').val(d);
 
     });
 
@@ -51,6 +54,35 @@ $(document).ready(function () {
             $('.remove-choice').off("click");
         }
     }
+    
+    function questionResult(){
+        var form = $(".answer.form");
+        var questionid = $("[name='id']", form).val();
+
+        $.ajax({
+            url: "/questions/" + questionid + "/chart",
+            method: "GET",
+            success: function(response) {
+                console.log(response);
+                
+            }
+        });
+    }
+
+    $('#seeResult').on("click", questionResult);
+
+
+    // var data = {
+    //     series: [5, 3, 2]
+    // };
+    //
+    // var sum = function(a, b) { return a + b };
+    //
+    // new Chartist.Pie('.ct-chart', data, {
+    //     labelInterpolationFnc: function(value) {
+    //         return Math.round(value / data.series.reduce(sum) * 100) + '%';
+    //     }
+    // });
 
     $('.ui.question.form').form({
         inline : true,

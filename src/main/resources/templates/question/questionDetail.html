@@ -49,11 +49,14 @@
     <div class="row">
         <h1>Answering a question</h1>
         <div class="ui container">
+
             <form class="ui answer form" method="post" th:action="@{/answers}" th:object="${question}">
                 <div class="grouped fields">
 
+                    <input type="hidden" name="id" th:value="*{id}" th:data-questionid="${question.id}" />
+
                     <label>Owner</label>
-                    <div class="description">
+                    <div class="description" >
                         <span th:text="*{owner.name}"></span>
                     </div>
 
@@ -78,12 +81,24 @@
                         <input type="hidden" name="timeout" th:value="*{timeout}" />
                     </div>
                 </div>
+
                 <div class="field">
                    <div id="timer"></div>
                 </div>
+
                 <p th:text="${answered}"></p>
+
                 <button class="ui right floated vote button" id="vote" th:data-content="You have voted before" type="submit">Vote</button>
+
+                <a th:href="@{'/questions/' + ${question.id} + '/chart'}">
+                    <button class="ui right floated vote button" id="seeResult">See Result</button>
+                </a>
+
             </form>
+
+            <div class="ct-chart">
+            </div>
+
         </div>
     </div>
 </th:block>

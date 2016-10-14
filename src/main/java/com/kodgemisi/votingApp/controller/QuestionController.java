@@ -1,15 +1,11 @@
 package com.kodgemisi.votingApp.controller;
 
-import com.kodgemisi.votingApp.domain.Answer;
-import com.kodgemisi.votingApp.domain.Choice;
-import com.kodgemisi.votingApp.domain.Question;
-import com.kodgemisi.votingApp.domain.User;
+import com.kodgemisi.votingApp.domain.*;
 import com.kodgemisi.votingApp.repository.AnswerRepository;
 import com.kodgemisi.votingApp.repository.QuestionRepository;
+import com.kodgemisi.votingApp.service.AnswerService;
 import com.kodgemisi.votingApp.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +13,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Null;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ozge on 17.08.2016.
@@ -37,6 +33,9 @@ public class QuestionController {
 
 	@Autowired
 	private QuestionService questionService;
+
+	@Autowired
+	private AnswerService answerService;
 
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public String newQuestion(Model model, @AuthenticationPrincipal User user){
@@ -90,18 +89,29 @@ public class QuestionController {
 			model.addAttribute("answered", "Your vote is saved");
 			model.addAttribute("selectedChoice", answer.getChoice().getId());
 		}
-
 		model.addAttribute("question", this.questionRepository.findOne(id));
 
 		return "question/questionDetail";
 	}
 
-//	@RequestMapping(value = "/{id}/chart", method = RequestMethod.GET)
-//	@ResponseBody
-//	ResponseEntity<String> showQuestionResult(@PathVariable("id")Long id){
-//
-//
-//		return new ResponseEntity(HttpStatus.OK);
-//	}
+	@RequestMapping(value = "/{id}/chart", method = RequestMethod.GET)
+	@ResponseBody
+	Map<Long, Long> showQuestionResult(@PathVariable("id") Long id, @AuthenticationPrincipal User user){
+
+		Question question = this.questionRepository.findById(id);
+		List<Choice> choices = question.getChoices();
+		Map<Long,Long> voteCounts = new HashMap();
+		for (Choice choice : choices) {
+			for (Answer answer : choice.getAnswers()) {
+				if (choice.getId() == answer.getChoice().getId()){
+					voteCounts.put(answer.getId(),choice.getVoteCount());
+				}
+			}
+
+		}
+
+		return voteCounts;
+	}
+
 
 }
