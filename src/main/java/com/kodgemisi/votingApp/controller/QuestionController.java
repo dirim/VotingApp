@@ -107,11 +107,8 @@ public class QuestionController {
 					voteCounts.put(answer.getId(),choice.getVoteCount());
 				}
 			}
-
 		}
-
 		return voteCounts;
 	}
-
 
 }

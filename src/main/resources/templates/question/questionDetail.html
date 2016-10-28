@@ -18,17 +18,22 @@
 
     function startTimer(duration, display) {
         var timer = duration;
+        var hours;
         var minutes;
         var seconds;
 
         setInterval(function () {
-            minutes = parseInt(timer / 60);
-            seconds = parseInt(timer % 60);
+            hours = parseInt(timer / 3600) % 24;
+            minutes = parseInt((timer % 3600) / 60);
+//            minutes = parseInt(timer / 60);
+//            seconds = parseInt(timer % 60);
+            seconds = parseInt(timer % 3600 ) % 60;
 
+            hours = hours < 10 ? "0" + hours : hours;
             minutes = minutes < 10 ? "0" + minutes : minutes;
             seconds = seconds < 10 ? "0" + seconds : seconds;
 
-            display.text(minutes + ":" + seconds);
+            display.text(hours + ":" + minutes + ":" + seconds);
 
             if (--timer < 0) {
                 clearInterval(timer);
@@ -38,7 +43,7 @@
     }
 
     jQuery(function ($) {
-        var durationInSeconds = timeout * 60;
+        var durationInSeconds = timeout;
         var display = $('#timer');
         startTimer(durationInSeconds, display);
     });
