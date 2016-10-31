@@ -2,6 +2,7 @@ package com.kodgemisi.votingApp.controller;
 
 import com.kodgemisi.votingApp.domain.*;
 import com.kodgemisi.votingApp.repository.AnswerRepository;
+import com.kodgemisi.votingApp.repository.ChoiceRepository;
 import com.kodgemisi.votingApp.repository.QuestionRepository;
 import com.kodgemisi.votingApp.service.AnswerService;
 import com.kodgemisi.votingApp.service.QuestionService;
@@ -36,6 +37,9 @@ public class QuestionController {
 
 	@Autowired
 	private AnswerService answerService;
+
+	@Autowired
+	private ChoiceRepository choiceRepository;
 
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public String newQuestion(Model model, @AuthenticationPrincipal User user){
@@ -101,13 +105,11 @@ public class QuestionController {
 		Question question = this.questionRepository.findById(id);
 		List<Choice> choices = question.getChoices();
 		Map<Long,Long> voteCounts = new HashMap();
-		for (Choice choice : choices) {
-			for (Answer answer : choice.getAnswers()) {
-				if (choice.getId() == answer.getChoice().getId()){
-					voteCounts.put(answer.getId(),choice.getVoteCount());
-				}
-			}
+
+		for(Choice choice : choices){
+			voteCounts.put(choice.getId(), choice.getVoteCount());
 		}
+
 		return voteCounts;
 	}
 

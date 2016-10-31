@@ -25,8 +25,6 @@
         setInterval(function () {
             hours = parseInt(timer / 3600) % 24;
             minutes = parseInt((timer % 3600) / 60);
-//            minutes = parseInt(timer / 60);
-//            seconds = parseInt(timer % 60);
             seconds = parseInt(timer % 3600 ) % 60;
 
             hours = hours < 10 ? "0" + hours : hours;

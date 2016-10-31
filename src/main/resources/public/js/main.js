@@ -6,8 +6,6 @@ $(document).ready(function () {
     
     $('.ui.ten.minutes.button').on("click", function () {
 
-       // $('#timeoutCalculation').val(10);
-
         var time = "00:10:00";
         var tt = time.split(":");
         var sec = tt[0]*3600 + tt[1]*60 + tt[2]*1;
@@ -15,8 +13,6 @@ $(document).ready(function () {
     });
 
     $('.ui.thirty.minutes.button').on("click", function () {
-
-       // $('#timeoutCalculation').val(30);
 
         var time = "00:30:00";
         var tt = time.split(":");
@@ -70,8 +66,9 @@ $(document).ready(function () {
             $('.remove-choice').off("click");
         }
     }
-    
-    function questionResult(){
+
+    function questionResult(e){
+        e.preventDefault();
         var form = $(".answer.form");
         var questionid = $("[name='id']", form).val();
 
@@ -80,17 +77,18 @@ $(document).ready(function () {
             method: "GET",
             success: function(data) {
                 
-                console.log(data);
-
                 var data = {
+                    customLabels:['Choice1', 'Choice2', 'Choice3'],
                     series: [5, 3, 2]
                 };
-
+                
                 var sum = function(a, b) { return a + b };
-
+                
+                var globalIndex = 0;
+                
                 new Chartist.Pie('.ct-chart', data, {
                     labelInterpolationFnc: function(value) {
-                        return Math.round(value / data.series.reduce(sum) * 100) + '%';
+                        return data.customLabels[globalIndex++] + '(' + Math.round(value / data.series.reduce(sum) * 100) + '%' + value + 'votes)';
                     }
                 });
                 
@@ -99,23 +97,7 @@ $(document).ready(function () {
     }
 
     $('#seeResult').on("click", questionResult);
-
-    //
-    // var data = {
-    //     customLabels:['Choice1', 'Choice2', 'Choice3'],
-    //     series: [5, 3, 2]
-    // };
-    //
-    // var sum = function(a, b) { return a + b };
-    //
-    // var globalIndex = 0;
-    //
-    // new Chartist.Pie('.ct-chart', data, {
-    //     labelInterpolationFnc: function(value) {
-    //         return data.customLabels[globalIndex++] + '(' + Math.round(value / data.series.reduce(sum) * 100) + '%' + value + 'votes)';
-    //     }
-    // });
-
+    
     $('.ui.question.form').form({
         inline : true,
         on     : 'blur',
