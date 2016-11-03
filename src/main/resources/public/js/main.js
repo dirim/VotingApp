@@ -75,13 +75,19 @@ $(document).ready(function () {
         $.ajax({
             url: "/questions/" + questionid + "/chart",
             method: "GET",
-            success: function(data) {
-                
+            success: function(response) {
                 var data = {
-                    customLabels:['Choice1', 'Choice2', 'Choice3'],
-                    series: [5, 3, 2]
+                    customLabels: [],
+                    series: []
                 };
-                
+
+                $.each(response, function (key, value) {
+                    data.customLabels.push(key);
+                    data.series.push(value);
+                });
+
+                debugger;
+
                 var sum = function(a, b) { return a + b };
                 
                 var globalIndex = 0;

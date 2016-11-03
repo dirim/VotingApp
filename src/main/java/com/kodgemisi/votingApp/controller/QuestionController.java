@@ -100,16 +100,15 @@ public class QuestionController {
 
 	@RequestMapping(value = "/{id}/chart", method = RequestMethod.GET)
 	@ResponseBody
-	Map<Long, Long> showQuestionResult(@PathVariable("id") Long id, @AuthenticationPrincipal User user){
+	Map<String, Long> showQuestionResult(@PathVariable("id") Long id, @AuthenticationPrincipal User user){
 
 		Question question = this.questionRepository.findById(id);
 		List<Choice> choices = question.getChoices();
-		Map<Long,Long> voteCounts = new HashMap();
+		Map<String,Long> voteCounts = new HashMap();
 
 		for(Choice choice : choices){
-			voteCounts.put(choice.getId(), choice.getVoteCount());
+			voteCounts.put(choice.getText(), choice.getVoteCount());
 		}
-
 		return voteCounts;
 	}
 
