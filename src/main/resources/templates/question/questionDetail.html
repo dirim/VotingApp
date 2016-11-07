@@ -6,12 +6,8 @@
 
     var timeout = [[${remainingTime}]];
     var questionAnswered = [[${answered}]];
-    var abc = [[${question.timeout}]]
 
-    console.log(timeout);
-    console.log(abc);
-
-    if (questionAnswered) {
+    if (questionAnswered || timeout <= 0) {
         jQuery(function ($) {
             $("#vote").prop("disabled", true);
 
@@ -81,13 +77,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="field">
-                        <input type="hidden" name="creationDate" th:value="${#dates.format(question.creationDate, 'dd/MM/YYYY')}" />
-
-                        <!--<input type="hidden" name="timeout" th:value="${remainingTime}" />-->
-
-                    </div>
                 </div>
 
                 <div class="field">
@@ -101,7 +90,6 @@
                 <a th:href="@{'/questions/' + ${question.id} + '/chart'}">
                     <button class="ui right floated vote button" id="seeResult">See Result</button>
                 </a>
-
             </form>
 
             <div class="ct-chart">
