@@ -22,8 +22,8 @@
 <div class="ui grid container">
     <div class="four wide column">
         <div class="ui left fixed vertical inverted menu">
-            <a class="item" href="./login.html">
-                <h4 class="ui grey header">John Doe</h4>
+            <a class="item" th:href="@{/users/login}">
+                <h4 class="ui grey header"></h4>
                 <p>Sign Out</p>
             </a>
             <a class="active gray item" th:href="@{/questions/new}">
@@ -32,17 +32,6 @@
             <a class="item" th:href="@{/questions}">
                 Question List
             </a>
-
-            <!--<a class="item" href="./products.html">-->
-            <!--Products-->
-            <!--<div class="ui label"></div>-->
-            <!--</a>-->
-            <!--<a class="item" href="./customers.html">-->
-            <!--Customers-->
-            <!--</a>-->
-            <!--<a class="item" href="./employees.html">-->
-            <!--Employees-->
-            <!--</a>-->
         </div>
     </div>
 

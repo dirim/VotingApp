@@ -95,6 +95,8 @@ public class QuestionController {
 		}
 		model.addAttribute("question", this.questionRepository.findOne(id));
 
+		model.addAttribute("remainingTime", this.questionService.calculateRemainingTime(id));
+
 		return "question/questionDetail";
 	}
 

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,6 +31,16 @@ public class QuestionService {
 			question.setVoteCount(voteCount);
 		}
 		return questions;
+	}
+
+	public long calculateRemainingTime(Long id){
+
+		Question question = this.questionRepository.findById(id);
+		long dueTime = question.getCreationDate().getTime().getTime() + question.getTimeout() * 1000;
+		Calendar now = Calendar.getInstance();
+		long remainingTime = dueTime - now.getTime().getTime();
+
+		return remainingTime;
 	}
 
 }

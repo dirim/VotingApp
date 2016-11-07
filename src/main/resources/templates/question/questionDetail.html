@@ -4,8 +4,12 @@
 <script type="text/javascript" th:inline="javascript">
     /*<![CDATA[*/
 
-    var timeout = [[${question.timeout}]];
+    var timeout = [[${remainingTime}]];
     var questionAnswered = [[${answered}]];
+    var abc = [[${question.timeout}]]
+
+    console.log(timeout);
+    console.log(abc);
 
     if (questionAnswered) {
         jQuery(function ($) {
@@ -41,7 +45,7 @@
     }
 
     jQuery(function ($) {
-        var durationInSeconds = timeout;
+        var durationInSeconds = timeout / 1000;
         var display = $('#timer');
         startTimer(durationInSeconds, display);
     });
@@ -81,7 +85,8 @@
                     <div class="field">
                         <input type="hidden" name="creationDate" th:value="${#dates.format(question.creationDate, 'dd/MM/YYYY')}" />
 
-                        <input type="hidden" name="timeout" th:value="*{timeout}" />
+                        <!--<input type="hidden" name="timeout" th:value="${remainingTime}" />-->
+
                     </div>
                 </div>
 
