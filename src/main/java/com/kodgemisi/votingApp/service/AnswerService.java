@@ -52,18 +52,4 @@ public class AnswerService {
 		return answer;
 	}
 
-	public boolean timeCalculation(QuestionDto questionDto){
-
-		Calendar now = Calendar.getInstance();
-
-		Calendar creationDate = questionDto.getCreationDate();
-		creationDate.add(Calendar.MINUTE, questionDto.getTimeout());
-
-		if( now.getTime().compareTo(creationDate.getTime()) > 0){
-			return true;
-		}
-		return true;
-	}
-
-
 }

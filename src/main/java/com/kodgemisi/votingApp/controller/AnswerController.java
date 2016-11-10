@@ -51,7 +51,7 @@ public class AnswerController {
 
 		Answer answer = this.answerRepository.findByOwnerAndChoiceQuestion(user, this.questionRepository.findById(questionDto.getId()));
 
-		if(this.answerService.timeCalculation(questionDto) &&  ( answer == null )){
+		if(answer == null){
 			this.answerService.createAnswer(user, questionDto);
 		}
 

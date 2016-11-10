@@ -37,9 +37,8 @@ $(document).ready(function () {
         var tt = time.split(":");
         var sec = tt[0]*3600 + tt[1]*60 + tt[2]*1;
         $('#timeoutCalculation').val(sec);
-
     });
-
+    
     $('.remove-choice').on("click", removeChoiceEvent);
 
     var lastChoiceIndex = $('#choices .fields:last').data("index");
