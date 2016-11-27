@@ -14,9 +14,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by ozge on 17.08.2016.
@@ -52,7 +52,7 @@ public class QuestionController {
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String createQuestion(@ModelAttribute @Valid Question question, BindingResult bindingResult,
-									@AuthenticationPrincipal User user){
+									@AuthenticationPrincipal User user) throws ParseException {
 
 		if(bindingResult.hasErrors()){
 			return "redirect:/questions/new";
@@ -60,6 +60,31 @@ public class QuestionController {
 
 		for (Choice choice: question.getChoices()) {
 			choice.setQuestion(question);
+		}
+
+		if (question.getTimeout() == 120000) {
+			//calculate
+			//question.setTimeout(result)
+
+			String timeForNoon = "12:00:00";
+			SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+			Date dueTimeForNoon = format.parse(timeForNoon);
+			Calendar now = Calendar.getInstance();
+			question.setCreationDate(now);
+
+			long timeDifference = dueTimeForNoon.getTime() - question.getCreationDate().getTime().getTime();
+
+			question.setTimeout((int) timeDifference);
+
+		} else if (question.getTimeout() == 000000) {
+
+			String timeForMidnight = "23:59:00";
+			SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+			Date dueTimeForMidnight = format.parse(timeForMidnight);
+			Calendar now = Calendar.getInstance();
+			question.setCreationDate(now);
+			long timeDifference = dueTimeForMidnight.getTime() - question.getCreationDate().getTime().getTime();
+			question.setTimeout((int) timeDifference);
 		}
 
 		question.setOwner(user);

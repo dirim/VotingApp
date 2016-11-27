@@ -67,8 +67,9 @@
 
                     <div class= "field">
                         <label>Minutes</label>
-                        <input type="number" id="timeoutCalculation"  placeholder="Timeout" th:field="*{timeout}" th:value="5"/>
+                        <input id="timeoutCalculation"  placeholder="Timeout" th:value="5"/>
                     </div>
+                    <input id="timeout" type="hidden" name="timeout" />
                 </div>
 
                 <button class="ui button" type="submit">Create</button>

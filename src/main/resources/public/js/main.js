@@ -10,6 +10,7 @@ $(document).ready(function () {
         var tt = time.split(":");
         var sec = tt[0]*3600 + tt[1]*60 + tt[2]*1;
         $('#timeoutCalculation').val(sec);
+        $('#timeout').val(sec);
     });
 
     $('.ui.thirty.minutes.button').on("click", function () {
@@ -18,25 +19,33 @@ $(document).ready(function () {
         var tt = time.split(":");
         var sec = tt[0]*3600 + tt[1]*60 + tt[2]*1;
         $('#timeoutCalculation').val(sec);
+        $('#timeout').val(sec);
     });
 
     $('.ui.noon.button').on("click", function () {
        // $('#timeoutCalculation').val(12);
 
-        var time = "12:00:00";
-        var tt = time.split(":");
-        var sec = tt[0]*3600 + tt[1]*60 + tt[2]*1;
-        $('#timeoutCalculation').val(sec);
+        // var time = "12:00:00";
+        // var tt = time.split(":");
+        // var sec = tt[0]*3600 + tt[1]*60 + tt[2]*1;
+
+        var noon = 120000;
+        $('#timeoutCalculation').val("noon");
+        $('*#timeout').val(noon);
 
     });
 
     $('.ui.today.button').on("click", function () {
        // $('#timeoutCalculation').val(00);
 
-        var time = "00:00:00";
-        var tt = time.split(":");
-        var sec = tt[0]*3600 + tt[1]*60 + tt[2]*1;
-        $('#timeoutCalculation').val(sec);
+        // var time = "00:00:00";
+        // var tt = time.split(":");
+        // var sec = tt[0]*3600 + tt[1]*60 + tt[2]*1;
+
+        var midnight = 000000;
+        $('#timeoutCalculation').val("midnight");
+        $('#timeout').val(midnight);
+
     });
     
     $('.remove-choice').on("click", removeChoiceEvent);
@@ -84,8 +93,6 @@ $(document).ready(function () {
                     data.customLabels.push(key);
                     data.series.push(value);
                 });
-
-                debugger;
 
                 var sum = function(a, b) { return a + b };
                 
