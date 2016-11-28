@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 /**
@@ -63,28 +65,22 @@ public class QuestionController {
 		}
 
 		if (question.getTimeout() == 120000) {
-			//calculate
-			//question.setTimeout(result)
+			
+			LocalDateTime today = LocalDateTime.now();
+			LocalDateTime timeForNoon = LocalDateTime.of(today.getYear(), today.getMonth(), today.getDayOfMonth(), 12, 00, 00);
 
-			String timeForNoon = "12:00:00";
-			SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-			Date dueTimeForNoon = format.parse(timeForNoon);
-			Calendar now = Calendar.getInstance();
-			question.setCreationDate(now);
-
-			long timeDifference = dueTimeForNoon.getTime() - question.getCreationDate().getTime().getTime();
-
+			long timeDifference = today.until(timeForNoon, ChronoUnit.SECONDS);
 			question.setTimeout((int) timeDifference);
+
 
 		} else if (question.getTimeout() == 000000) {
 
-			String timeForMidnight = "23:59:00";
-			SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-			Date dueTimeForMidnight = format.parse(timeForMidnight);
-			Calendar now = Calendar.getInstance();
-			question.setCreationDate(now);
-			long timeDifference = dueTimeForMidnight.getTime() - question.getCreationDate().getTime().getTime();
+			LocalDateTime t =  LocalDateTime.now();
+			LocalDateTime timeForMidnight = LocalDateTime.of(t.getYear(), t.getMonth(), t.getDayOfMonth(), 23, 59, 00);
+
+			long timeDifference = t.until(timeForMidnight, ChronoUnit.SECONDS);
 			question.setTimeout((int) timeDifference);
+
 		}
 
 		question.setOwner(user);
