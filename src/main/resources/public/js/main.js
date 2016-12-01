@@ -23,11 +23,6 @@ $(document).ready(function () {
     });
 
     $('.ui.noon.button').on("click", function () {
-       // $('#timeoutCalculation').val(12);
-
-        // var time = "12:00:00";
-        // var tt = time.split(":");
-        // var sec = tt[0]*3600 + tt[1]*60 + tt[2]*1;
 
         var noon = 120000;
         $('#timeoutCalculation').val("noon");
@@ -36,11 +31,6 @@ $(document).ready(function () {
     });
 
     $('.ui.today.button').on("click", function () {
-       // $('#timeoutCalculation').val(00);
-
-        // var time = "00:00:00";
-        // var tt = time.split(":");
-        // var sec = tt[0]*3600 + tt[1]*60 + tt[2]*1;
 
         var midnight = 000000;
         $('#timeoutCalculation').val("midnight");
@@ -108,7 +98,7 @@ $(document).ready(function () {
         });
     }
 
-    $('#seeResult').on("click", questionResult);
+    // $('#seeResult').on("click", questionResult);
     
     $('.ui.question.form').form({
         inline : true,
