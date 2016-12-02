@@ -85,20 +85,20 @@ $(document).ready(function () {
                 });
 
                 var sum = function(a, b) { return a + b };
-                
+
                 var globalIndex = 0;
-                
+
                 new Chartist.Pie('.ct-chart', data, {
                     labelInterpolationFnc: function(value) {
                         return data.customLabels[globalIndex++] + '(' + Math.round(value / data.series.reduce(sum) * 100) + '%' + value + 'votes)';
                     }
                 });
-                
+
             }
         });
     }
 
-    // $('#seeResult').on("click", questionResult);
+    $('#seeResult').on("click", questionResult);
     
     $('.ui.question.form').form({
         inline : true,

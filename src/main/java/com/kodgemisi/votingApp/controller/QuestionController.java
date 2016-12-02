@@ -37,12 +37,6 @@ public class QuestionController {
 	@Autowired
 	private QuestionService questionService;
 
-	@Autowired
-	private AnswerService answerService;
-
-	@Autowired
-	private ChoiceRepository choiceRepository;
-
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public String newQuestion(Model model, @AuthenticationPrincipal User user){
 
@@ -64,42 +58,7 @@ public class QuestionController {
 			choice.setQuestion(question);
 		}
 
-		if (question.getTimeout() == 120000) {
-
-			LocalDateTime today = LocalDateTime.now();
-			LocalDateTime timeForNoon = LocalDateTime.of(today.getYear(), today.getMonth(), today.getDayOfMonth(), 12, 00, 00);
-
-			if(today.isAfter(timeForNoon)){
-
-				LocalDateTime newNoon = timeForNoon.plusHours(24);
-				long timeDiff = today.until(newNoon, ChronoUnit.SECONDS);
-				question.setTimeout((int) timeDiff);
-
-			} else {
-
-				long timeDifference = today.until(timeForNoon, ChronoUnit.SECONDS);
-				question.setTimeout((int) timeDifference);
-
-			}
-
-		} else if (question.getTimeout() == 000000) {
-
-			LocalDateTime t =  LocalDateTime.now();
-			LocalDateTime timeForMidnight = LocalDateTime.of(t.getYear(), t.getMonth(), t.getDayOfMonth(), 23, 59, 00);
-
-			if(t.isAfter(timeForMidnight)){
-
-				long timeDiff = t.until(timeForMidnight.plusHours(24), ChronoUnit.SECONDS);
-				question.setTimeout((int) timeDiff);
-
-			} else {
-
-				long timeDifference = t.until(timeForMidnight, ChronoUnit.SECONDS);
-				question.setTimeout((int) timeDifference);
-
-			}
-		}
-
+		this.questionService.calculateTimeoutForNoonAndMidnight(question);
 		question.setOwner(user);
 		this.questionRepository.save(question);
 		return "redirect:/questions";
@@ -116,6 +75,7 @@ public class QuestionController {
 			Iterable<Question> questions = this.questionRepository.findAll();
 			Iterable<Question> calculatedQuestions = this.questionService.calculateVotes(questions);
 			model.addAttribute("questions", calculatedQuestions);
+
 		}
 
 		return "question/questionList";
