@@ -65,7 +65,7 @@ $(document).ready(function () {
         }
     }
 
-    function questionResult(e){
+    $(document).on("getQuestionResult", function(e) {
         e.preventDefault();
         var form = $(".answer.form");
         var questionid = $("[name='id']", form).val();
@@ -96,10 +96,12 @@ $(document).ready(function () {
 
             }
         });
+    });
+    
+    function questionResult(e){
+        
     }
 
-    $('#seeResult').on("click", questionResult);
-    
     $('.ui.question.form').form({
         inline : true,
         on     : 'blur',

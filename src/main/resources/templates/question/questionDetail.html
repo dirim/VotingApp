@@ -48,7 +48,7 @@
                 clearInterval(timer);
                 display.text("sure doldu");
                 disableTimeout();
-
+                $(document).trigger("getQuestionResult");
             }
         }, 1000);
     }
@@ -100,9 +100,6 @@
 
                 <button class="ui right floated vote button" id="vote" th:data-content="You have voted before" type="submit">Vote</button>
 
-                <a th:href="@{'/questions/' + ${question.id} + '/chart'}">
-                    <button class="ui right floated vote button" id="seeResult">See Result</button>
-                </a>
             </form>
 
             <div class="ct-chart">
