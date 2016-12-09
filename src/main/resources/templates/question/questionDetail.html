@@ -85,8 +85,8 @@
                         <input type="hidden" name="id" th:value="*{id}" />
                         <div class="ui list">
                             <div class="item" th:each="choice: *{choices}">
-                                <input type="radio" name="choiceId"
-                                       th:value="${choice.id}" th:text="${choice.text}" th:checked="(${choice.id} == ${selectedChoice})" />
+                                <input type="radio" name="choiceId" th:value="${choice.id}"
+                                       th:text="${choice.text}" th:checked="(${choice.id} == ${selectedChoice})"/>
                             </div>
                         </div>
                     </div>

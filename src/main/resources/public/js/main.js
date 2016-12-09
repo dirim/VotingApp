@@ -6,7 +6,7 @@ $(document).ready(function () {
     
     $('.ui.ten.minutes.button').on("click", function () {
 
-        var time = "00:10:00";
+        var time = "00:01:00";
         var tt = time.split(":");
         var sec = tt[0]*3600 + tt[1]*60 + tt[2]*1;
         $('#timeoutCalculation').val(sec);

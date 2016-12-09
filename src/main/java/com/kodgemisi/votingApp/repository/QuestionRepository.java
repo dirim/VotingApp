@@ -17,5 +17,5 @@ public interface QuestionRepository extends CrudRepository<Question, Long> {
 
 		Question findById(@Param("id") Long id);
 
-		Question findByOwner(@Param("owner") User owner);
+		List<Question> findByOwner(@Param("owner") User owner);
 }

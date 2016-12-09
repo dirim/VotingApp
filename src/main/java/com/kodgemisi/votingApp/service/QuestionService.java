@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.TimeZone;
 
 /**
  * Created by ozge on 01.09.2016.
@@ -48,6 +48,8 @@ public class QuestionService {
 	public void calculateTimeoutForNoonAndMidnight(Question question){
 
 		if (question.getTimeout() == 120000) {
+
+//			TimeZone tz = TimeZone.getTimeZone("Turkey");
 
 			LocalDateTime today = LocalDateTime.now();
 			LocalDateTime timeForNoon = LocalDateTime.of(today.getYear(), today.getMonth(), today.getDayOfMonth(), 12, 00, 00);

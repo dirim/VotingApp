@@ -2,9 +2,7 @@ package com.kodgemisi.votingApp.controller;
 
 import com.kodgemisi.votingApp.domain.*;
 import com.kodgemisi.votingApp.repository.AnswerRepository;
-import com.kodgemisi.votingApp.repository.ChoiceRepository;
 import com.kodgemisi.votingApp.repository.QuestionRepository;
-import com.kodgemisi.votingApp.service.AnswerService;
 import com.kodgemisi.votingApp.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -12,12 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 /**
@@ -69,13 +63,13 @@ public class QuestionController {
 								@AuthenticationPrincipal User user){
 
 		if(mine){
-			model.addAttribute("questions", this.questionRepository.findByOwner(user));
-		}
-		else{
+			Iterable<Question> questions =  this.questionRepository.findByOwner(user);
+			Iterable<Question> calculatedQuestions = this.questionService.calculateVotes(questions);
+			model.addAttribute("questions", calculatedQuestions);
+		} else {
 			Iterable<Question> questions = this.questionRepository.findAll();
 			Iterable<Question> calculatedQuestions = this.questionService.calculateVotes(questions);
 			model.addAttribute("questions", calculatedQuestions);
-
 		}
 
 		return "question/questionList";
