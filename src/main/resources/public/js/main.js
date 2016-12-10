@@ -40,8 +40,9 @@ $(document).ready(function () {
     
     $('.remove-choice').on("click", removeChoiceEvent);
 
-    var lastChoiceIndex = $('#choices .fields:last').data("index");
+
     $('.add-choice').on("click", function () {
+        var lastChoiceIndex = $('#choices .fields:last').data("index");
         lastChoiceIndex++;
         var newChoice = createNewChoiceForm(lastChoiceIndex);
         $('#choices').append(newChoice);
@@ -57,11 +58,9 @@ $(document).ready(function () {
     }
 
     function removeChoiceEvent() {
-        var index = $(this).data("index");
-        $('#choicesForm .fields[data-index="' + index + '"] ').remove();
-
-        if($("#choicesForm .fields").length == 2) {
-            $('.remove-choice').off("click");
+        if($("#choicesForm .fields").length > 2) {
+            var index = $(this).data("index");
+            $('#choicesForm .fields[data-index="' + index + '"] ').remove();
         }
     }
 
@@ -126,6 +125,10 @@ $(document).ready(function () {
             }
         }
     });
+
+    // add default 2 choices
+    $('#choices').append(createNewChoiceForm(0));
+    $('#choices').append(createNewChoiceForm(1));
 
 });
 

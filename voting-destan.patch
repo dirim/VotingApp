@@ -1,0 +1,80 @@
+diff --git a/pom.xml b/pom.xml
+index 89b6d37..6ec97b4 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -54,6 +54,12 @@
+             <artifactId>h2</artifactId>
+         </dependency>
+ 
++        <dependency>
++            <groupId>org.springframework.boot</groupId>
++            <artifactId>spring-boot-devtools</artifactId>
++            <optional>true</optional>
++        </dependency>
++
+     </dependencies>
+ 
+     <repositories>
+diff --git a/src/main/resources/public/js/main.js b/src/main/resources/public/js/main.js
+index a4785e1..bc1148e 100644
+--- a/src/main/resources/public/js/main.js
++++ b/src/main/resources/public/js/main.js
+@@ -40,8 +40,9 @@ $(document).ready(function () {
+     
+     $('.remove-choice').on("click", removeChoiceEvent);
+ 
+-    var lastChoiceIndex = $('#choices .fields:last').data("index");
++
+     $('.add-choice').on("click", function () {
++        var lastChoiceIndex = $('#choices .fields:last').data("index");
+         lastChoiceIndex++;
+         var newChoice = createNewChoiceForm(lastChoiceIndex);
+         $('#choices').append(newChoice);
+@@ -57,11 +58,9 @@ $(document).ready(function () {
+     }
+ 
+     function removeChoiceEvent() {
+-        var index = $(this).data("index");
+-        $('#choicesForm .fields[data-index="' + index + '"] ').remove();
+-
+-        if($("#choicesForm .fields").length == 2) {
+-            $('.remove-choice').off("click");
++        if($("#choicesForm .fields").length > 2) {
++            var index = $(this).data("index");
++            $('#choicesForm .fields[data-index="' + index + '"] ').remove();
+         }
+     }
+ 
+@@ -127,6 +126,10 @@ $(document).ready(function () {
+         }
+     });
+ 
++    // add default 2 choices
++    $('#choices').append(createNewChoiceForm(1));
++    $('#choices').append(createNewChoiceForm(2));
++
+ });
+ 
+ 
+diff --git a/src/main/resources/templates/question/questionCreateForm.html b/src/main/resources/templates/question/questionCreateForm.html
+index 88609cd..46ca35d 100644
+--- a/src/main/resources/templates/question/questionCreateForm.html
++++ b/src/main/resources/templates/question/questionCreateForm.html
+@@ -20,16 +20,7 @@
+                 <div class="field" id="choicesForm">
+                     <label>Choices</label>
+                     <div class="field" id="choices">
+-                        <div class="fields" data-index="0">
+-                            <div class="fourteen wide field" >
+-                                <input type="text" th:name="${'choices[0].text'}" placeholder="choice 1" />
+-                            </div>
+-                            <div class="two wide field">
+-                                <button class="ui remove-choice icon button" data-index="0" type="button">
+-                                    <i class="trash icon"></i>
+-                                </button>
+-                            </div>
+-                        </div>
++                        <!-- There will be choices, default 2 choices are created by js -->
+                     </div>
+                 </div>
+ 
