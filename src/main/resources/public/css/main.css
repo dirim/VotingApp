@@ -2,3 +2,7 @@
 td a {
     display: block;
 }
+
+#answered{
+    color: green;
+}

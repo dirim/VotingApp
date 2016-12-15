@@ -40,6 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.logoutUrl("/users/logout")
 				.logoutSuccessUrl("/")
 				.permitAll();
+		http.headers().frameOptions().disable();
 	}
 
 	@Autowired

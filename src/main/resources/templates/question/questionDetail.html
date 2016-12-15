@@ -72,13 +72,14 @@
                     <input type="hidden" name="id" th:value="*{id}" th:data-questionid="${question.id}" />
 
                     <label>Owner</label>
-                    <div class="description" >
+                    <div class="description">
                         <span th:text="*{owner.name}"></span>
                     </div>
 
-                    <label>Desc</label>
+                    <label>Question</label>
                     <div class="description">
-                        <span th:text="*{description}"></span>
+                        <textarea rows="2" th:text="*{description}"></textarea>
+                        <!--<span th:text="*{description}"></span>-->
                     </div>
 
                     <div class="field">
@@ -98,7 +99,7 @@
                    <div id="timer"></div>
                 </div>
 
-                <p th:text="${answered}"></p>
+                <p id="answered" th:text="${answered}"></p>
 
                 <button class="ui right floated vote button" id="vote" th:data-content="You have voted before" type="submit">Vote</button>
 
