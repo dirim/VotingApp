@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Created by ozge on 21.08.2016.
  */
-@Configuration
+//@Configuration
 public class H2Config {
 
 	@Bean

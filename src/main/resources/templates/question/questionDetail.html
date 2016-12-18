@@ -1,6 +1,9 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="layout">
 <th:block layout:fragment="content">
 
+    <!--<script type="text/javascript">-->
+        <!--time();-->
+    <!--</script>-->
 <script type="text/javascript" th:inline="javascript">
     /*<![CDATA[*/
 
@@ -46,7 +49,7 @@
 
             if (--timer < 0) {
                 clearInterval(timer);
-                display.text("sure doldu");
+                display.text("Time is up");
                 disableTimeout();
                 $(document).trigger("getQuestionResult");
             }
@@ -69,30 +72,34 @@
             <form class="ui answer form" method="post" th:action="@{/answers}" th:object="${question}">
                 <div class="grouped fields">
 
-                    <input type="hidden" name="id" th:value="*{id}" th:data-questionid="${question.id}" />
+                    <input type="hidden" name="id" th:value="*{id}"/>
 
-                    <label>Owner</label>
-                    <div class="description">
-                        <span th:text="*{owner.name}"></span>
-                    </div>
+                    <fieldset>
+                        <legend>Owner</legend>
+                        <div class="description">
+                            <span th:text="*{owner.name}"></span>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Question</legend>
+                        <!--<label>Question</label>-->
+                        <div class="description">
+                            <!--<textarea rows="1" th:text="*{description}"></textarea>-->
+                            <span th:text="*{description}"></span>
+                        </div>
 
-                    <label>Question</label>
-                    <div class="description">
-                        <textarea rows="2" th:text="*{description}"></textarea>
-                        <!--<span th:text="*{description}"></span>-->
-                    </div>
-
-                    <div class="field">
-                        <input type="hidden" name="id" th:value="*{id}" />
-                        <div class="ui list">
-                            <div class="item" th:each="choice: *{choices}">
-                                <label>
-                                <input type="radio" name="choiceId" th:value="${choice.id}"
-                                       th:text="${choice.text}" th:checked="(${choice.id} == ${selectedChoice})"/>
-                                </label>
+                        <div class="field">
+                            <input type="hidden" name="id" th:value="*{id}" />
+                            <div class="ui list">
+                                <div class="item" th:each="choice: *{choices}">
+                                    <label>
+                                    <input type="radio" name="choiceId" th:value="${choice.id}"
+                                           th:text="${choice.text}" th:checked="(${choice.id} == ${selectedChoice})"/>
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </fieldset>
                 </div>
 
                 <div class="field">

@@ -3,7 +3,7 @@
 //  */
 //
 // function time () {
-//    
+//
 //     var timeout = [[${remainingTime}]];
 //     var questionAnswered = [[${answered}]];
 //
@@ -46,7 +46,7 @@
 //
 //             if (--timer < 0) {
 //                 clearInterval(timer);
-//                 display.text("sure doldu");
+//                 display.text("Time is up");
 //                 disableTimeout();
 //                 $(document).trigger("getQuestionResult");
 //             }

@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
@@ -27,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/users/login").permitAll()
 				.antMatchers("/console/**").permitAll()
 				.anyRequest()
-				.authenticated()
+				.fullyAuthenticated()
 				.and()
 				.formLogin()
 				.loginPage("/users/login")
@@ -37,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 				.and()
 				.logout()
+				.deleteCookies("JSESSIONID")
 				.logoutUrl("/users/logout")
 				.logoutSuccessUrl("/")
 				.permitAll();

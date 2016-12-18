@@ -13,23 +13,35 @@
     <script th:src="@{/js/semantic.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/main.js}"></script>
     <script type="text/javascript" th:src="@{/js/chartist.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/questionDetail.js}"></script>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
 </head>
 
 <body data-page="dashboard">
 
+<div class="ui inverted  menu">
+    <div class="right menu">
+        <form th:action="@{/users/logout}" method="post">
+            <input type="submit" value="Log Out"/>
+        </form>
+    </div>
+</div>
+
 <div class="ui grid container">
     <div class="four wide column">
         <div class="ui left fixed vertical inverted menu">
-            <a class="item" th:href="@{/users/login}">
-                <h4 class="ui grey header"></h4>
-                <p>Sign Out</p>
-            </a>
+            <!--<a class="item" th:href="@{/users/login}">-->
+                <!--<h4 class="ui grey header"></h4>-->
+                <!--<p>Sign Out</p>-->
+            <!--</a>-->
             <a class="item" th:href="@{/}">
-                Home
+                <div class="icon">
+                    <i class="home large icon"></i>
+                </div>
+                <!--Home-->
             </a>
-            <a class="active gray item" th:href="@{/questions/new}">
+            <a class="item" th:href="@{/questions/new}">
                 Question Form
             </a>
             <a class="item" th:href="@{/questions}">
