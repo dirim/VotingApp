@@ -1,6 +1,54 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="layout">
 <th:block layout:fragment="content">
 
+<script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+    var mine = [[${mine}]];
+    if(mine == true){
+        jQuery(function ($) {
+            $('input[name="mine"]').attr("checked", true);
+        })
+//       jQuery('input[name="mine"]').attr("checked", true);
+    }
+
+    debugger;
+    var timeout = [[${timeList}]];
+    debugger;
+
+    function startTimer(duration, display) {
+        var timer = duration;
+        var hours;
+        var minutes;
+        var seconds;
+
+        setInterval(function () {
+            hours = parseInt(timer / 3600) % 24;
+            minutes = parseInt((timer % 3600) / 60);
+            seconds = parseInt(timer % 3600 ) % 60;
+            debugger;
+            hours = hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.text(hours + ":" + minutes + ":" + seconds);
+
+            if (--timer < 0) {
+                clearInterval(timer);
+                display.text("Closed");
+            }
+        }, 1000);
+    }
+
+    jQuery(function ($) {
+
+        var durationInSeconds = timeout / 1000;
+        var display = $('#timer');
+        startTimer(durationInSeconds, display);
+    });
+
+    /*]]>*/
+</script>
+
     <div class="ui grid">
         <div class="row"></div>
         <div class="row">
@@ -28,6 +76,10 @@
             </form>
         </div>
 
+        <!--<div class="row">-->
+            <!--<p th:text="${timeList}"></p>-->
+        <!--</div>-->
+
         <div class="row">
             <table class="ui celled table">
                 <thead>
@@ -41,7 +93,8 @@
                 <tbody>
                 <tr th:each="question :${questions}">
                     <td><a th:href="@{'/questions/' + ${question.id}}" th:text="${question.description}"/></td>
-                    <td><div><a th:href="@{'/questions/' + ${question.id}}">Closes in <span th:text="${question.timeout}"></span></a></div></td>
+                    <!--<span th:text="${question.timeout}"></span>-->
+                    <td><div><a th:href="@{'/questions/' + ${question.id}}">Closes in <span id="timer" ></span></a></div></td>
                     <td><a th:href="@{'/questions/' + ${question.id}}" th:text="*{question.owner.name}" /></td>
                     <td><a th:href="@{'/questions/' + ${question.id}}" th:text="${question.voteCount}" /></td>
                 </tr>

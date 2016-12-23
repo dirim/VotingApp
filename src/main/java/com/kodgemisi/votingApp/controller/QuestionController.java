@@ -66,10 +66,21 @@ public class QuestionController {
 			Iterable<Question> questions =  this.questionRepository.findByOwner(user);
 			Iterable<Question> calculatedQuestions = this.questionService.calculateVotes(questions);
 			model.addAttribute("questions", calculatedQuestions);
+			model.addAttribute("mine", true);
 		} else {
 			Iterable<Question> questions = this.questionRepository.findAll();
 			Iterable<Question> calculatedQuestions = this.questionService.calculateVotes(questions);
 			model.addAttribute("questions", calculatedQuestions);
+
+//			model.addAttribute("time", this.questionService.calculateRemainingTime(this.questionRepository.findAll().iterator().next().getId()));
+
+			Map<Long, Long> questionsRemainingTime = new HashMap();
+			for(Question question: questions){
+
+				questionsRemainingTime.put(question.getId(), this.questionService.calculateRemainingTime(question.getId()));
+
+			}
+			model.addAttribute("timeList", questionsRemainingTime);
 		}
 
 		return "question/questionList";

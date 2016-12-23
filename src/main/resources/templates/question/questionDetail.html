@@ -2,8 +2,9 @@
 <th:block layout:fragment="content">
 
     <!--<script type="text/javascript">-->
-        <!--time();-->
+        <!--time([[${remainingTime}]], [[${answered}]]);-->
     <!--</script>-->
+
 <script type="text/javascript" th:inline="javascript">
     /*<![CDATA[*/
 
@@ -80,20 +81,18 @@
                             <span th:text="*{owner.name}"></span>
                         </div>
                     </fieldset>
+
                     <fieldset>
                         <legend>Question</legend>
-                        <!--<label>Question</label>-->
                         <div class="description">
-                            <!--<textarea rows="1" th:text="*{description}"></textarea>-->
                             <span th:text="*{description}"></span>
                         </div>
-
                         <div class="field">
                             <input type="hidden" name="id" th:value="*{id}" />
                             <div class="ui list">
                                 <div class="item" th:each="choice: *{choices}">
                                     <label>
-                                    <input type="radio" name="choiceId" th:value="${choice.id}"
+                                        <input type="radio" name="choiceId" th:value="${choice.id}"
                                            th:text="${choice.text}" th:checked="(${choice.id} == ${selectedChoice})"/>
                                     </label>
                                 </div>
