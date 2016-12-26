@@ -37,6 +37,8 @@ $(document).ready(function () {
         $('#timeout').val(midnight);
 
     });
+
+    $('.ui.radio.checkbox').checkbox();
     
     $('.remove-choice').on("click", removeChoiceEvent);
 
