@@ -49,8 +49,6 @@ public class QuestionService {
 
 		if (question.getTimeout() == 120000) {
 
-//			TimeZone tz = TimeZone.getTimeZone("Turkey");
-
 			LocalDateTime today = LocalDateTime.now();
 			LocalDateTime timeForNoon = LocalDateTime.of(today.getYear(), today.getMonth(), today.getDayOfMonth(), 12, 00, 00);
 

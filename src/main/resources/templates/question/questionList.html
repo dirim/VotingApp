@@ -26,7 +26,7 @@
             minutes = minutes < 10 ? "0" + minutes : minutes;
             seconds = seconds < 10 ? "0" + seconds : seconds;
 
-            display.text(hours + ":" + minutes + ":" + seconds);
+            display.text("Closes in " + hours + ":" + minutes + ":" + seconds);
 
             if (--timer < 0) {
                 clearInterval(timer);
@@ -91,7 +91,7 @@
                 <tbody>
                 <tr th:each="question :${questions}">
                     <td><a th:href="@{'/questions/' + ${question.id}}" th:text="${question.description}"/></td>
-                    <td><div><a th:href="@{'/questions/' + ${question.id}}">Closes in <span data-th-attr="data-question=${question.id}" class="timer" ></span></a></div></td>
+                    <td><div><a th:href="@{'/questions/' + ${question.id}}"><span data-th-attr="data-question=${question.id}" class="timer" ></span></a></div></td>
                     <td><a th:href="@{'/questions/' + ${question.id}}" th:text="*{question.owner.name}" /></td>
                     <td><a th:href="@{'/questions/' + ${question.id}}" th:text="${question.voteCount}" /></td>
                 </tr>
