@@ -8,12 +8,9 @@
         jQuery(function ($) {
             $('input[name="mine"]').attr("checked", true);
         })
-//       jQuery('input[name="mine"]').attr("checked", true);
     }
 
-    debugger;
     var timeout = [[${timeList}]];
-    debugger;
 
     function startTimer(duration, display) {
         var timer = duration;
@@ -25,7 +22,6 @@
             hours = parseInt(timer / 3600) % 24;
             minutes = parseInt((timer % 3600) / 60);
             seconds = parseInt(timer % 3600 ) % 60;
-            debugger;
             hours = hours < 10 ? "0" + hours : hours;
             minutes = minutes < 10 ? "0" + minutes : minutes;
             seconds = seconds < 10 ? "0" + seconds : seconds;
@@ -41,9 +37,15 @@
 
     jQuery(function ($) {
 
-        var durationInSeconds = timeout / 1000;
-        var display = $('#timer');
-        startTimer(durationInSeconds, display);
+        var durationInSeconds = 0;
+        for(var id in timeout) {
+            if (timeout.hasOwnProperty(id)) {
+                durationInSeconds = timeout[id] / 1000;
+                var display = $('.timer[data-question=' + id + ']');
+                startTimer(durationInSeconds, display);
+            }
+        }
+
     });
 
     /*]]>*/
@@ -76,10 +78,6 @@
             </form>
         </div>
 
-        <!--<div class="row">-->
-            <!--<p th:text="${timeList}"></p>-->
-        <!--</div>-->
-
         <div class="row">
             <table class="ui celled table">
                 <thead>
@@ -93,8 +91,7 @@
                 <tbody>
                 <tr th:each="question :${questions}">
                     <td><a th:href="@{'/questions/' + ${question.id}}" th:text="${question.description}"/></td>
-                    <!--<span th:text="${question.timeout}"></span>-->
-                    <td><div><a th:href="@{'/questions/' + ${question.id}}">Closes in <span id="timer" ></span></a></div></td>
+                    <td><div><a th:href="@{'/questions/' + ${question.id}}">Closes in <span data-th-attr="data-question=${question.id}" class="timer" ></span></a></div></td>
                     <td><a th:href="@{'/questions/' + ${question.id}}" th:text="*{question.owner.name}" /></td>
                     <td><a th:href="@{'/questions/' + ${question.id}}" th:text="${question.voteCount}" /></td>
                 </tr>
