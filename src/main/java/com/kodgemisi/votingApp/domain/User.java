@@ -4,16 +4,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.*;
 
 /**
  * Created by ozge on 17.08.2016.
  */
 @Entity
+@Table(name = "USERS")
 public class User extends BaseEntity implements UserDetails {
 
 	private String name;
