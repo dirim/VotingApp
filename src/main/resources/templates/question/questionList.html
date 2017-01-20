@@ -92,7 +92,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="question :${questions}">
-                    <td><a th:href="@{'/questions/' + ${question.id}}" th:text="${question.description}"/></td>
+                    <td><a th:href="@{'/questions/' + ${question.id}}" th:text="${question.name}"/></td>
                     <td><div><a th:href="@{'/questions/' + ${question.id}}"><span data-th-attr="data-question=${question.id}" class="timer" ></span></a></div></td>
                     <td><a th:href="@{'/questions/' + ${question.id}}" th:text="*{question.owner.name}" /></td>
                     <td><a th:href="@{'/questions/' + ${question.id}}" th:text="${question.voteCount}" /></td>
