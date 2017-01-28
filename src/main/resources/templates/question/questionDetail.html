@@ -10,7 +10,7 @@
     if (questionAnswered) {
         jQuery(function ($) {
             $("#vote").prop("disabled", true);
-
+            $(document).trigger("getQuestionResult");
             $('input[name="choiceId"]').attr('disabled', 'disabled');
 
         });

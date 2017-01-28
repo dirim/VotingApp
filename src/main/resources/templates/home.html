@@ -1,4 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="layout">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <th:block layout:fragment="content">
 
     <div class="ui grid">
@@ -8,9 +9,11 @@
                 <h1>VotingApp</h1>
             </div>
             <div class="six wide column">
-                <a th:href="@{/users/login}">
-                    <button class="ui right floated button">Login</button>
-                </a>
+                <div sec:authorize="isAnonymous()">
+                    <a th:href="@{/users/login}">
+                        <button class="ui right floated button">Login</button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

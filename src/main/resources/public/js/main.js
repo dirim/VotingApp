@@ -3,7 +3,11 @@
  */
 
 $(document).ready(function () {
-    
+
+    // add default 2 choices
+    $('#choices').append(createNewChoiceForm(0));
+    $('#choices').append(createNewChoiceForm(1));
+
     $('.ui.ten.minutes.button').on("click", function () {
 
         var time = "00:10:00";
@@ -38,6 +42,8 @@ $(document).ready(function () {
 
     });
 
+    $("#timeoutCalculation").prop("disabled", true);
+
     $('.ui.radio.checkbox').checkbox();
     
     $('.remove-choice').on("click", removeChoiceEvent);
@@ -53,7 +59,7 @@ $(document).ready(function () {
 
     function createNewChoiceForm(index) {
         var fields = $("<div class='fields' data-index='" + index + "'></div>");
-        var inputField = $("<div class='fourteen wide field'><input type='text' name='choices[" + index + "].text' placeholder='choice " + index + "' /></div>");
+        var inputField = $("<div class='fourteen wide field'><input type='text' class='choice-input-validation' name='choices[" + index + "].text' placeholder='choice " + index + "' /></div>");
         var removeField = $("<div class='two wide field'><button class='ui remove-choice icon button' data-index='" + index + "' type='button'><i class='trash icon'></i></button></div>");
         fields.append(inputField).append(removeField);
         return fields;
@@ -99,9 +105,24 @@ $(document).ready(function () {
         });
     });
     
-    function questionResult(e){
-        
-    }
+    function questionResult(e){}
+
+    console.log($('.choice-input-validation').length);
+
+    $.fn.form.settings.rules.myChoicesVal = function () {
+
+        // at least 2 choice
+        if($('.choice-input-validation').length < 2){
+           return true;
+        }
+         
+        // choice value cannot be null
+        $('.choice-input-validation').each(function () {
+            if($(this).val() === ""){
+                return true;
+            }
+        });
+    };
 
     $('.ui.question.form').form({
         inline : true,
@@ -124,13 +145,18 @@ $(document).ready(function () {
                         prompt : 'Please enter a description '
                     }
                 ]
+            },
+            choices: {
+                identifier: 'choices[0].text',
+                rules: [
+                    {
+                        type   : 'myChoicesVal',
+                        prompt : 'Please enter at least two choices'
+                    }
+                ]
             }
         }
     });
-
-    // add default 2 choices
-    $('#choices').append(createNewChoiceForm(0));
-    $('#choices').append(createNewChoiceForm(1));
 
 });
 
