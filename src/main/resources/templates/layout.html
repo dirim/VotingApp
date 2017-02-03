@@ -22,8 +22,8 @@
 <div class="ui inverted  menu">
     <div class="right menu">
         <div sec:authorize="isAuthenticated()">
-            <form th:action="@{/users/logout}" method="post">
-                <input type="submit" value="Log Out"/>
+            <form class="ui form" th:action="@{/users/logout}" method="post">
+                <button class="ui black button" type="submit">Log Out</button>
             </form>
         </div>
     </div>

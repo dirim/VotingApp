@@ -126,7 +126,7 @@ $(document).ready(function () {
 
     $('.ui.question.form').form({
         inline : true,
-        on     : 'blur',
+        on     : 'submit',
         fields: {
             name: {
                 identifier: 'name',
