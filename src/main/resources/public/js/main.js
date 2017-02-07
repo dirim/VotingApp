@@ -111,17 +111,23 @@ $(document).ready(function () {
 
     $.fn.form.settings.rules.myChoicesVal = function () {
 
+        var result = false;
+
         // at least 2 choice
         if($('.choice-input-validation').length < 2){
            return true;
         }
-         
+
         // choice value cannot be null
         $('.choice-input-validation').each(function () {
             if($(this).val() === ""){
                 return true;
+
             }
+            result = true;
         });
+        
+        return result;
     };
 
     $('.ui.question.form').form({
