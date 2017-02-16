@@ -23,26 +23,8 @@ import java.util.List;
 @SpringBootApplication
 public class VotingApplication {
 
-//	@Autowired
-//	private UserRepository userRepository;
-
 	public static void main(String[] args) {
 		SpringApplication.run(VotingApplication.class, args);
 	}
 
-//	@Bean
-//	public SessionFactory sessionFactory(EntityManagerFactory emf) {
-//		if (emf.unwrap(SessionFactory.class) == null) {
-//			throw new NullPointerException("factory is not a hibernate factory");
-//		}
-//		return emf.unwrap(SessionFactory.class);
-//	}
-//
-//	@Override
-//	public void run(String... strings) throws Exception {
-//
-//		User user = new User("ozgee", "ozge", "123");
-//		this.userRepository.save(user);
-//
-//	}
 }
