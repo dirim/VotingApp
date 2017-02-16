@@ -82,32 +82,22 @@ $(document).ready(function () {
             method: "GET",
             success: function(response) {
                 var data = {
-                    customLabels: [],
-                    series: []
+                    labels: [],
+                    series: [[]]
                 };
 
                 $.each(response, function (key, value) {
-                    data.customLabels.push(key);
-                    data.series.push(value);
+                    data.labels.push(key);
+                    data.series[0].push(value);
                 });
-
-                var sum = function(a, b) { return a + b };
-
-                var globalIndex = 0;
-
-                new Chartist.Pie('.ct-chart', data, {
-                    labelInterpolationFnc: function(value) {
-                        return data.customLabels[globalIndex++] + '(' + Math.round(value / data.series.reduce(sum) * 100) + '%' + value + 'votes)';
-                    }
-                });
+                
+                new Chartist.Bar('.ct-chart', data);
 
             }
         });
     });
     
     function questionResult(e){}
-
-    console.log($('.choice-input-validation').length);
 
     $.fn.form.settings.rules.myChoicesVal = function () {
 
