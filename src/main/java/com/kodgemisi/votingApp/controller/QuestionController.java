@@ -2,7 +2,9 @@ package com.kodgemisi.votingApp.controller;
 
 import com.kodgemisi.votingApp.domain.*;
 import com.kodgemisi.votingApp.repository.AnswerRepository;
+import com.kodgemisi.votingApp.repository.ChoiceRepository;
 import com.kodgemisi.votingApp.repository.QuestionRepository;
+import com.kodgemisi.votingApp.service.ChoiceService;
 import com.kodgemisi.votingApp.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -104,6 +106,10 @@ public class QuestionController {
 			model.addAttribute("selectedChoice", answer.getChoice().getId());
 		}
 		model.addAttribute("question", this.questionRepository.findOne(id));
+
+		Question question = this.questionRepository.findOne(id);
+		List<Choice> choiceList = question.getChoices();
+		choiceList.sort((Choice o1, Choice o2) -> o1.getId().compareTo(o2.getId()));
 
 		model.addAttribute("remainingTime", this.questionService.calculateRemainingTime(id));
 
